@@ -10,21 +10,21 @@ using namespace std;
 
 class Client {
 public:
-    Client(const string &imie, const string &nazwisko, const string &personalId);
+    Client(string imie, string nazwisko, string personalId);
 
     string getInfo();
 
     const string &getImie() const;
 
-    void setImie(const string &imie);
+    void setImie(const string& noweImie);
 
     const string &getNazwisko() const;
 
-    void setNazwisko(const string &nazwisko);
+    void setNazwisko(const string& noweNazwisko);
 
     const string &getPersonalId() const;
 
-    void setPersonalId(const string &personalId);
+    void setPersonalId(const string& nowePersonalId);
 
 private:
     string Imie;
