@@ -12,7 +12,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteClient)
         string imie = "Janero";
         string nazwisko = "Kolodziejczykiewski";
         string id = "2433";
-        Client client1(imie,nazwisko,id);
+        Client client1(imie,nazwisko,id,"Lodz","Wolczanska","243");
         BOOST_TEST(client1.getImie()==imie);
         BOOST_TEST(client1.getNazwisko()==nazwisko);
         BOOST_TEST(client1.getPersonalId()==id);
@@ -22,7 +22,7 @@ BOOST_AUTO_TEST_SUITE(TestSuiteClient)
         string noweimie = "Mirek";
         string nowenazwisko = "Frankowski";
         string noweid = "420";
-        Client client1("Janek","Kolodziejczyk","243");
+        Client client1("Janek","Kolodziejczyk","243","Lodz","Wolczanska","243");
         client1.setImie(noweimie);
         client1.setNazwisko(nowenazwisko);
         client1.setPersonalId(noweid);
@@ -35,10 +35,10 @@ BOOST_AUTO_TEST_SUITE(TestSuiteClient)
         string imie = "Janek";
         string nazwisko = "Kolodziejczyk";
         string id = "243";
-        string noweimie = "";
-        string nowenazwisko = "";
-        string noweid = "";
-        Client client1(imie,nazwisko,id);
+        string noweimie;
+        string nowenazwisko;
+        string noweid;
+        Client client1(imie,nazwisko,id,"Lodz","Wolczanska","243");
         client1.setImie(noweimie);
         client1.setNazwisko(nowenazwisko);
         client1.setPersonalId(noweid);

@@ -6,8 +6,9 @@
 
 #include "../../include/model/Client.h"
 
-Client::Client(string imie, string nazwisko, string personalId) : Imie(std::move(imie)), Nazwisko(std::move(nazwisko)),
-                                                                                       PersonalID(std::move(personalId)) {}
+Client::Client(string imie, string nazwisko, string personalId, string city, string street, string number)
+        : address(new Address(city, street, number)), Imie(std::move(imie)), Nazwisko(std::move(nazwisko)), PersonalID(std::move(personalId)) {}
+
 
 const string &Client::getImie() const {
     return Imie;
@@ -45,4 +46,13 @@ void Client::setPersonalId(const string& nowePersonalId) {
 string Client::getInfo()
 {
     return("Imie: " + Imie + " " + "Nazwisko: " + Nazwisko + " " + "Personal ID: " + PersonalID);
+}
+
+string Client::getFullInfo()
+{
+    return("Imie: " + Imie +" Nazwisko: " + Nazwisko +" Personal ID: " + PersonalID +" Miasto: " + address->getCity() + " Ulica: " + address->getStreet() + " Numer domu: " + address->getNumber());
+}
+
+Client::~Client() {
+    delete address;
 }

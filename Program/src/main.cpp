@@ -5,8 +5,8 @@ using namespace std;
 int main(){
 
     // Utwórz obiekt klienta
-    Client client1("", "", ""); // Tworzymy obiekt klienta z pustymi danymi
-    Client *client2 = new Client("Marek","Otwocki","233");
+    Client client1("", "", "","Lodz","Wolczanska","243"); // Tworzymy obiekt klienta z pustymi danymi
+    Client *client2 = new Client("Marek","Otwocki","233","Lodz","Wolczanska","243");
     // Ustawienie danych za pomocą setterów
     client1.setImie("Janek");
     client1.setNazwisko("Marczewski");
@@ -18,6 +18,7 @@ int main(){
 
     // Wyświetlenie informacji o kliencie
     cout << client1.getInfo() << endl;
+    cout << client1.getFullInfo() << endl;
     cout << client2->getInfo() << endl;
 
     delete client2;

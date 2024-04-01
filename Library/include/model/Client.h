@@ -5,14 +5,17 @@
 #ifndef POBI_CLIENT_H
 #define POBI_CLIENT_H
 #include <iostream>
-
+#include <model/Address.h>
 using namespace std;
 
 class Client {
 public:
-    Client(string imie, string nazwisko, string personalId);
+    virtual ~Client();
+
+    Client(string imie, string nazwisko, string personalId, string city, string street, string number);
 
     string getInfo();
+    string getFullInfo();
 
     const string &getImie() const;
 
@@ -27,6 +30,7 @@ public:
     void setPersonalId(const string& nowePersonalId);
 
 private:
+    Address* address;
     string Imie;
     string Nazwisko;
     string PersonalID;
