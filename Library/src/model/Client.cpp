@@ -5,6 +5,7 @@
 #include <utility>
 
 #include "../../include/model/Client.h"
+#include <model/Rent.h>
 
 Client::Client(const std::string& imie, const std::string& nazwisko, const std::string& personalId, const string& city, const string& street, const string& number)
         : address(new Address(city, street, number)), Imie(std::move(imie)), Nazwisko(std::move(nazwisko)), PersonalID(std::move(personalId)) {}
@@ -14,43 +15,46 @@ const string &Client::getImie() const {
     return Imie;
 }
 
-void Client::setImie(const string& noweImie) {
-    if(noweImie.empty())
+void Client::setImie(const string& Imie) {
+    if(Imie.empty())
         cout << "Zmiania nie zadzialala" << endl;
     else
-        Imie = noweImie;
+        this->Imie = Imie;
 }
 
 const string &Client::getNazwisko() const {
     return Nazwisko;
 }
 
-void Client::setNazwisko(const string& noweNazwisko) {
-    if(noweNazwisko.empty())
+void Client::setNazwisko(const string& Nazwisko) {
+    if(Nazwisko.empty())
         cout << "Zmiania nie zadzialala" << endl;
     else
-        Nazwisko = noweNazwisko;
+        this->Nazwisko = Nazwisko;
 }
 
 const string &Client::getPersonalId() const {
     return PersonalID;
 }
 
-void Client::setPersonalId(const string& nowePersonalId) {
-    if(nowePersonalId.empty())
+void Client::setPersonalId(const string& PersonalId) {
+    if(PersonalId.empty())
         cout << "Zmiania nie zadzialala" << endl;
     else
-        PersonalID = nowePersonalId;
+        this->PersonalID = PersonalId;
 }
 
-string Client::getInfo()
-{
-    return("Imie: " + Imie + " " + "Nazwisko: " + Nazwisko + " " + "Personal ID: " + PersonalID);
-}
-
-string Client::getFullInfo()
-{
+string Client::getInfo() const {
     return("Imie: " + Imie +" Nazwisko: " + Nazwisko +" Personal ID: " + PersonalID +" Miasto: " + address->getCity() + " Ulica: " + address->getStreet() + " Numer domu: " + address->getNumber());
+}
+
+
+string Client::getFullInfo() const {
+    string fullInfo = getInfo() + "\nCurrent rents:\n";
+    for (const auto &rent: currentRents)
+        fullInfo += rent->getInfo() + "\n";
+
+    return fullInfo;
 }
 
 void Client::setAddress(const string& city, const string& street, const string& number) {

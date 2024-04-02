@@ -21,7 +21,7 @@ void Address::setCity(const string &city) {
     if (city.empty())
         cout <<"Blad w ustawianiu miasta" << endl;
     else
-        Address::city = city;
+        this->city = city;
 }
 
 const string &Address::getStreet() const {
@@ -32,7 +32,7 @@ void Address::setStreet(const string &street) {
     if (street.empty())
         cout <<"Blad w ustawianiu ulicy" << endl;
     else
-        Address::street = street;
+        this->street = street;
 }
 
 const string &Address::getNumber() const {
@@ -43,5 +43,5 @@ void Address::setNumber(const string &number) {
     if (number.empty())
         cout << "Blad w ustawianiu numeru domu" << endl;
     else
-        Address::number = number;
+        this->number = number;
 }

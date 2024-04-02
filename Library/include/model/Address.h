@@ -11,6 +11,8 @@ using namespace std;
 class Address {
 private:
     string city;
+    string street;
+    string number;
 public:
     const string &getCity() const;
 
@@ -24,10 +26,6 @@ public:
 
     void setNumber(const string &number);
 
-private:
-    string street;
-    string number;
-public:
     Address(const string &city, const string &street, const string &number);
     string getInfo();
 

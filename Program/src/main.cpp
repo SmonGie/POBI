@@ -1,30 +1,27 @@
 #include <iostream>
 #include "model/Client.h"
+#include "model/Vehicle.h"
+#include "model/Rent.h"
+
 using namespace std;
 
 int main(){
 
-    // Utworzenie obiektu Address
-    Address* address = new Address("Warszawa", "Marszałkowska", "123");
+    Client client("John", "Doe", "123", "New York", "Main St", "123");
 
-    // Utworzenie dwóch obiektów Client, oba współdzielą ten sam adres
-    Client* client1 = new Client("Jan", "Kowalski", "1", address);
-    Client* client2 = new Client("Anna", "Nowak", "2", address);
+    // Utwórz obiekt Vehicle
+    Vehicle vehicle("ABC", 30);
+    vehicle.setPlateNumber("ABC123");
+    vehicle.setBasePrice(50);
 
-    // Pobranie wskaźnika Address z obiektu client1
-    Address* sharedAddress = client1->getAddress();
+    // Utwórz obiekt Rent wiążący powyższe obiekty
+    Rent rent(1, &client, &vehicle);
 
-    // Zmiana wartości pola w obiekcie współdzielonym
-    sharedAddress->setCity("Krakow");
+    // Wyświetl wynik wywołania metody getInfo() na obiekcie Rent
+    cout << "Rent info:\n" << rent.getInfo() << endl <<endl;
 
-    // Wypisanie stanu obu obiektów Client
-    cout << "Client 1 info: " << client1->getFullInfo() << endl;
-    cout << "Client 2 info: " << client2->getFullInfo() << endl;
-
-    // Zwolnienie pamięci
-    delete client1;
-    delete client2;
-    delete address;
+    // Wyświetl wynik wywołania metody getFullInfo() na obiekcie Client
+    cout << "Client full info:\n" << client.getFullInfo() << endl <<endl;
 
     return 0;
 
