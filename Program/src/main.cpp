@@ -4,24 +4,27 @@ using namespace std;
 
 int main(){
 
-    // Utwórz obiekt klienta
-    Client client1("", "", "","Lodz","Wolczanska","243"); // Tworzymy obiekt klienta z pustymi danymi
-    Client *client2 = new Client("Marek","Otwocki","233","Lodz","Wolczanska","243");
-    // Ustawienie danych za pomocą setterów
-    client1.setImie("Janek");
-    client1.setNazwisko("Marczewski");
-    client1.setPersonalId("133");
+    // Utworzenie obiektu Address
+    Address* address = new Address("Warszawa", "Marszałkowska", "123");
 
-    client2->setImie("Maro");
-    client2->setNazwisko("Marczeski");
-    client2->setPersonalId("234");
+    // Utworzenie dwóch obiektów Client, oba współdzielą ten sam adres
+    Client* client1 = new Client("Jan", "Kowalski", "1", address);
+    Client* client2 = new Client("Anna", "Nowak", "2", address);
 
-    // Wyświetlenie informacji o kliencie
-    cout << client1.getInfo() << endl;
-    cout << client1.getFullInfo() << endl;
-    cout << client2->getInfo() << endl;
+    // Pobranie wskaźnika Address z obiektu client1
+    Address* sharedAddress = client1->getAddress();
 
+    // Zmiana wartości pola w obiekcie współdzielonym
+    sharedAddress->setCity("Krakow");
+
+    // Wypisanie stanu obu obiektów Client
+    cout << "Client 1 info: " << client1->getFullInfo() << endl;
+    cout << "Client 2 info: " << client2->getFullInfo() << endl;
+
+    // Zwolnienie pamięci
+    delete client1;
     delete client2;
+    delete address;
 
     return 0;
 

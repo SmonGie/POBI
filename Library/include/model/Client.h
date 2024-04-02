@@ -10,10 +10,14 @@ using namespace std;
 
 class Client {
 public:
+    void setAddress(const string& city, const string& street, const string& number);
+
     virtual ~Client();
 
-    Client(string imie, string nazwisko, string personalId, string city, string street, string number);
+    Address *getAddress() const;
 
+    Client(const std::string& imie, const std::string& nazwisko, const std::string& personalId, const string& city, const string& street, const string& number);
+    Client(const std::string& imie, const std::string& nazwisko, const std::string& personalId, Address* address);
     string getInfo();
     string getFullInfo();
 

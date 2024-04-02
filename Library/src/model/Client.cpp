@@ -6,7 +6,7 @@
 
 #include "../../include/model/Client.h"
 
-Client::Client(string imie, string nazwisko, string personalId, string city, string street, string number)
+Client::Client(const std::string& imie, const std::string& nazwisko, const std::string& personalId, const string& city, const string& street, const string& number)
         : address(new Address(city, street, number)), Imie(std::move(imie)), Nazwisko(std::move(nazwisko)), PersonalID(std::move(personalId)) {}
 
 
@@ -53,6 +53,23 @@ string Client::getFullInfo()
     return("Imie: " + Imie +" Nazwisko: " + Nazwisko +" Personal ID: " + PersonalID +" Miasto: " + address->getCity() + " Ulica: " + address->getStreet() + " Numer domu: " + address->getNumber());
 }
 
-Client::~Client() {
-    delete address;
+void Client::setAddress(const string& city, const string& street, const string& number) {
+    if (city.empty() || street.empty() || number.empty())
+        cout << "Blad w ustawianiu adresu, poniewaz jeden ze skladnikow jest pusty" << endl;
+    else{
+        Client::address->setCity(city);
+        Client::address->setStreet(street);
+        Client::address->setNumber(number);
+    }
 }
+
+Client::Client(const string& imie, const string& nazwisko, const string& personalId, Address* address)
+        : address(address), Imie(imie), Nazwisko(nazwisko), PersonalID(personalId) {}
+
+
+
+Address *Client::getAddress() const {
+    return address;
+}
+
+Client::~Client() {}

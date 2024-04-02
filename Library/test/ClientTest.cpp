@@ -1,50 +1,71 @@
 #include <boost/test/unit_test.hpp>
 #include <model/Client.h>
+
 namespace btt = boost::test_tools;
+
+struct ClientFixture {
+    string imie;
+    string nazwisko;
+    string id;
+    string miasto;
+    string ulica;
+    string numerulicy;
+    Client client;
+
+    ClientFixture()
+            : imie("Janek"),
+              nazwisko("Kolodziejczyk"),
+              id("243"),
+              miasto("Lodz"),
+              ulica("Wolczanska"),
+              numerulicy("243"),
+              client(imie, nazwisko, id, miasto, ulica, numerulicy) {}
+};
 
 BOOST_AUTO_TEST_SUITE(TestSuiteClient)
 
-    BOOST_AUTO_TEST_CASE(AssertionsTests) {
-        BOOST_TEST(1.0/3.0==0.333, btt::tolerance(0.033));
+    BOOST_FIXTURE_TEST_CASE(Gettery, ClientFixture) {
+        BOOST_TEST(client.getAddress()->getCity() == miasto);
+        BOOST_TEST(client.getAddress()->getStreet() == ulica);
+        BOOST_TEST(client.getAddress()->getNumber() == numerulicy);
+        BOOST_TEST(client.getImie() == imie);
+        BOOST_TEST(client.getNazwisko() == nazwisko);
+        BOOST_TEST(client.getPersonalId() == id);
     }
-    BOOST_AUTO_TEST_CASE(Gettery)
-    {
-        string imie = "Janero";
-        string nazwisko = "Kolodziejczykiewski";
-        string id = "2433";
-        Client client1(imie,nazwisko,id,"Lodz","Wolczanska","243");
-        BOOST_TEST(client1.getImie()==imie);
-        BOOST_TEST(client1.getNazwisko()==nazwisko);
-        BOOST_TEST(client1.getPersonalId()==id);
 
-    }
-    BOOST_AUTO_TEST_CASE(SetteryDobrze){
+    BOOST_FIXTURE_TEST_CASE(SetteryDobrze, ClientFixture) {
         string noweimie = "Mirek";
         string nowenazwisko = "Frankowski";
         string noweid = "420";
-        Client client1("Janek","Kolodziejczyk","243","Lodz","Wolczanska","243");
-        client1.setImie(noweimie);
-        client1.setNazwisko(nowenazwisko);
-        client1.setPersonalId(noweid);
-        BOOST_TEST(client1.getImie()==noweimie);
-        BOOST_TEST(client1.getNazwisko()==nowenazwisko);
-        BOOST_TEST(client1.getPersonalId()==noweid);
+        client.setImie(noweimie);
+        client.setNazwisko(nowenazwisko);
+        client.setPersonalId(noweid);
+        client.setAddress("Mikolajow", "59", "33");
+        BOOST_TEST(client.getImie() == noweimie);
+        BOOST_TEST(client.getNazwisko() == nowenazwisko);
+        BOOST_TEST(client.getPersonalId() == noweid);
+        BOOST_TEST(client.getAddress()->getCity() == "Mikolajow");
+        BOOST_TEST(client.getAddress()->getStreet() == "59");
+        BOOST_TEST(client.getAddress()->getNumber() == "33");
     }
 
-    BOOST_AUTO_TEST_CASE(SetteryBlad){
-        string imie = "Janek";
-        string nazwisko = "Kolodziejczyk";
-        string id = "243";
+    BOOST_FIXTURE_TEST_CASE(SetteryBlad, ClientFixture) {
         string noweimie;
         string nowenazwisko;
         string noweid;
-        Client client1(imie,nazwisko,id,"Lodz","Wolczanska","243");
-        client1.setImie(noweimie);
-        client1.setNazwisko(nowenazwisko);
-        client1.setPersonalId(noweid);
-        BOOST_TEST(client1.getImie()==imie);
-        BOOST_TEST(client1.getNazwisko()==nazwisko);
-        BOOST_TEST(client1.getPersonalId()==id);
+        string nowemiasto;
+        string nowaulica;
+        string nowynumerulicy;
+        client.setImie(noweimie);
+        client.setNazwisko(nowenazwisko);
+        client.setPersonalId(noweid);
+        client.setAddress(nowemiasto, nowaulica, nowynumerulicy);
+        BOOST_TEST(client.getImie() == imie);
+        BOOST_TEST(client.getNazwisko() == nazwisko);
+        BOOST_TEST(client.getPersonalId() == id);
+        BOOST_TEST(client.getAddress()->getCity() == miasto);
+        BOOST_TEST(client.getAddress()->getStreet() == ulica);
+        BOOST_TEST(client.getAddress()->getNumber() == numerulicy);
     }
 
 BOOST_AUTO_TEST_SUITE_END()

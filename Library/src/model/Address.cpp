@@ -4,9 +4,7 @@
 
 #include "model/Address.h"
 
-Address::~Address() {
-
-}
+Address::~Address() = default;
 
 Address::Address(const string &city, const string &street, const string &number) : city(city), street(street),
                                                                                    number(number) {}
@@ -20,7 +18,10 @@ const string &Address::getCity() const {
 }
 
 void Address::setCity(const string &city) {
-    Address::city = city;
+    if (city.empty())
+        cout <<"Blad w ustawianiu miasta" << endl;
+    else
+        Address::city = city;
 }
 
 const string &Address::getStreet() const {
@@ -28,7 +29,10 @@ const string &Address::getStreet() const {
 }
 
 void Address::setStreet(const string &street) {
-    Address::street = street;
+    if (street.empty())
+        cout <<"Blad w ustawianiu ulicy" << endl;
+    else
+        Address::street = street;
 }
 
 const string &Address::getNumber() const {
@@ -36,5 +40,8 @@ const string &Address::getNumber() const {
 }
 
 void Address::setNumber(const string &number) {
-    Address::number = number;
+    if (number.empty())
+        cout << "Blad w ustawianiu numeru domu" << endl;
+    else
+        Address::number = number;
 }
